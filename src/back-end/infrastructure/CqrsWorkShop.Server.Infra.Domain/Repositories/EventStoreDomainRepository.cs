@@ -13,16 +13,23 @@ namespace Hse.CqrsWorkShop.Domain.Repositories
 {
     public class EventStoreDomainRepository : DomainRepositoryBase
     {
-        private readonly IEventStoreConnection _connection;
+        private IEventStoreConnection _connection;
         private readonly IGuidIdProvider _guidIdProvider;
         private const string Category = "HseShop";
 
         public string EventClrTypeHeader = "EventClrTypeName";
 
-        public EventStoreDomainRepository(IEventStoreConnection connection, IGuidIdProvider guidIdProvider)
+        public EventStoreDomainRepository(IEventStoreConnectionProvider eventStoreConnectionProvider, IGuidIdProvider guidIdProvider)
         {
-            _connection = connection;
+            InitializeEventStoreConnection(eventStoreConnectionProvider);
             _guidIdProvider = guidIdProvider;
+        }
+
+        private async void InitializeEventStoreConnection(IEventStoreConnectionProvider eventStoreConnectionProvider)
+        {
+            _connection = eventStoreConnectionProvider.GetConnection();
+
+            await _connection.ConnectAsync().ConfigureAwait(false);
         }
 
         public override async Task<IEnumerable<IEvent>> SaveAsync<TAggregate>(TAggregate aggregate)

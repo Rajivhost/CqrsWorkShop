@@ -31,6 +31,7 @@ namespace Hse.CqrsWorkShop.Domain
         protected virtual void RegisterDomainServices(IServiceRegistry serviceRegistry)
         {
             //serviceRegistry.Register<ICommandDispatcher, CommandDispatcher>(new PerContainerLifetime());
+            serviceRegistry.Register<IEventStoreConnectionProvider, EventStoreConnectionProvider>(new PerContainerLifetime());
             serviceRegistry.Register<ICommandDispatcherFactory>(factory => new CommandDispatcherFactory(factory), new PerContainerLifetime());
         }
     }

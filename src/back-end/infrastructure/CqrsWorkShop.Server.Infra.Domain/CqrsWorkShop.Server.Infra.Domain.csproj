@@ -50,6 +50,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -58,8 +59,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CommandDispatcherFactory.cs" />
+    <Compile Include="Factories\CommandDispatcherFactory.cs" />
     <Compile Include="DomainBootstrapper.cs" />
+    <Compile Include="Factories\EventStoreConnectionProvider.cs" />
+    <Compile Include="Factories\IEventStoreConnectionProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\EventStoreDomainRepository.cs" />
     <Compile Include="Repositories\InMemoryDomainRespository.cs" />
