@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Hse.CqrsWorkShop.Domain.Events;
 
 namespace Hse.CqrsWorkShop.Domain.Repositories
 {
     public abstract class DomainRepositoryBase : IDomainRepository
     {
-        public abstract IEnumerable<IEvent> Save<TAggregate>(TAggregate aggregate) where TAggregate : IAggregate;
-        public abstract TAggregate GetById<TAggregate>(Guid id) where TAggregate : IAggregate, new();
+        public abstract Task<IEnumerable<IEvent>> SaveAsync<TAggregate>(TAggregate aggregate) where TAggregate : IAggregate;
+        public abstract Task<TAggregate> GetByIdAsync<TAggregate>(Guid id) where TAggregate : IAggregate, new();
 
         protected int CalculateExpectedVersion<T>(IAggregate aggregate, List<T> events)
         {
