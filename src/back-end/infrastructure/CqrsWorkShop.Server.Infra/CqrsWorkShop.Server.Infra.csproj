@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{64346818-2D6F-4B58-B112-846F09584F77}</ProjectGuid>
+    <ProjectGuid>{22A7858D-1D45-4A2F-BA1C-7DC11BFF5670}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Hse.CqrsWorkShop.Domain</RootNamespace>
-    <AssemblyName>CqrsWorkShop.Server.Infra.Domain</AssemblyName>
+    <RootNamespace>Hse.CqrsWorkShop</RootNamespace>
+    <AssemblyName>CqrsWorkShop.Server.Infra</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -16,37 +16,26 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\..\..\output\back-end\infrastructure\SERVER.INFRA.DOMAIN\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;NET45 SERVER INFRA DOMAIN</DefineConstants>
+    <OutputPath>..\..\..\..\output\back-end\infrastructure\SERVER.INFRA\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;NET45 SERVER INFRA</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\..\..\..\output\back-end\infrastructure\SERVER.INFRA.DOMAIN\</OutputPath>
-    <DefineConstants>TRACE;NET45 SERVER INFRA DOMAIN</DefineConstants>
+    <OutputPath>..\..\..\..\output\back-end\infrastructure\SERVER.INFRA\</OutputPath>
+    <DefineConstants>TRACE;NET45 SERVER INFRA</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Catel.Core, Version=4.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\lib\Catel.Core.4.4.0\lib\net45\Catel.Core.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="CqrsWorkShop.Server.Core.Events">
-      <HintPath>..\..\..\..\output\back-end\core\SERVER.CORE.EVENTS\CqrsWorkShop.Server.Core.Events.dll</HintPath>
-    </Reference>
-    <Reference Include="EventStore.ClientAPI, Version=3.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\lib\EventStore.Client.3.4.0\lib\net40\EventStore.ClientAPI.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="LightInject, Version=4.0.4.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\..\lib\LightInject.4.0.4\lib\net45\LightInject.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\lib\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="NewId, Version=2.1.3.0, Culture=neutral, PublicKeyToken=b8e0e9f2f1e657fa, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\lib\NewId.2.1.3\lib\net45\NewId.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -58,28 +47,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CommandDispatcherFactory.cs" />
-    <Compile Include="DomainBootstrapper.cs" />
+    <Compile Include="Bootstrapping\BootstrapperBase.cs" />
+    <Compile Include="Bootstrapping\Interfaces\IBootstrapper.cs" />
+    <Compile Include="GuidIdProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\EventStoreDomainRepository.cs" />
-    <Compile Include="Repositories\InMemoryDomainRespository.cs" />
+    <Compile Include="SharedBootstrapper.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\core\CqrsWorkShop.Server.Core.Commands\CqrsWorkShop.Server.Core.Commands.fsproj">
-      <Project>{29d1e281-b04c-44a7-b219-c8ae8d6b6ef2}</Project>
-      <Name>CqrsWorkShop.Server.Core.Commands</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\core\CqrsWorkShop.Server.Core.Domain\CqrsWorkShop.Server.Core.Domain.csproj">
-      <Project>{AF835AA0-C2E2-4B48-B25C-4620406DE7D0}</Project>
-      <Name>CqrsWorkShop.Server.Core.Domain</Name>
-    </ProjectReference>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\..\core\CqrsWorkShop.Server.Core\CqrsWorkShop.Server.Core.csproj">
       <Project>{91CB2A76-EB3D-4DFD-A076-D06CEAC53071}</Project>
       <Name>CqrsWorkShop.Server.Core</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

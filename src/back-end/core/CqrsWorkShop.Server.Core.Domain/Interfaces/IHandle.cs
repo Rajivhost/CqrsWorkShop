@@ -1,9 +1,10 @@
-﻿using Hse.CqrsWorkShop.Domain.Commands;
+﻿using System.Threading.Tasks;
+using Hse.CqrsWorkShop.Domain.Commands;
 
 namespace Hse.CqrsWorkShop.Domain
 {
     public interface IHandle<in TCommand> where TCommand : ICommand
     {
-        IAggregate Handle(TCommand command);
+        Task<IAggregate> HandleAsync(TCommand command);
     }
 }

@@ -44,6 +44,13 @@
   <ItemGroup>
     <Compile Include="Events.fs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CqrsWorkShop.Server.Core.Entities\CqrsWorkShop.Server.Core.Entities.fsproj">
+      <Name>CqrsWorkShop.Server.Core.Entities</Name>
+      <Project>{a93d4ec3-20de-4540-95d1-07aed5d5d181}</Project>
+      <Private>True</Private>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <MinimumVisualStudioVersion Condition="'$(MinimumVisualStudioVersion)' == ''">11</MinimumVisualStudioVersion>
   </PropertyGroup>

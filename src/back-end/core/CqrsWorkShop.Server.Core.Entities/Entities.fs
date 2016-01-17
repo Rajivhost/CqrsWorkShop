@@ -7,4 +7,5 @@ type IEntity =
     abstract member Id: int
 
 type OrderLine = 
-    {ProductId: Guid; ProductName: string; OriginalPrice: int; DiscountedPrice: int; Quantity: int}
+    {Id: int; ProductId: Guid; ProductName: string; OriginalPrice: int; DiscountedPrice: int; Quantity: int}
+    with interface IEntity with member this.Id with get() = this.Id

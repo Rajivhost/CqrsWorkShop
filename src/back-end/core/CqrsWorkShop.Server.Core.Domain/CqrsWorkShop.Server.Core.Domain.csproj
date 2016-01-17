@@ -30,9 +30,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CqrsWorkShop.Server.Core.Events">
+    <Reference Include="CqrsWorkShop.Server.Core.Entities">
+      <HintPath>..\..\..\..\output\back-end\core\SERVER.CORE.EVENTS\CqrsWorkShop.Server.Core.Entities.dll</HintPath>
+    </Reference>
+    <Reference Include="CqrsWorkShop.Server.Core.Events, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\output\back-end\core\SERVER.CORE.EVENTS\CqrsWorkShop.Server.Core.Events.dll</HintPath>
     </Reference>
+    <Reference Include="FSharp.Core, Version=4.3.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -43,10 +48,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Aggregates\AggregateBase.cs" />
+    <Compile Include="Aggregates\CustomerAggregate.cs" />
+    <Compile Include="Aggregates\OrderAggregate.cs" />
+    <Compile Include="Aggregates\ProductAggregate.cs" />
     <Compile Include="CommandDispatcher.cs" />
+    <Compile Include="CommandHandlers\CustomerCommandHandler.cs" />
+    <Compile Include="CommandHandlers\Interfaces\ICustomerCommandHandler.cs" />
+    <Compile Include="CommandHandlers\Interfaces\IProductCommandHandler.cs" />
+    <Compile Include="CommandHandlers\Interfaces\IOrderCommandHandler.cs" />
+    <Compile Include="CommandHandlers\OrderCommandHandler.cs" />
+    <Compile Include="CommandHandlers\ProductCommandHandler.cs" />
+    <Compile Include="DomainExceptions.cs" />
+    <Compile Include="GuidIdGenerator.cs" />
     <Compile Include="Interfaces\ICommandDispatcher.cs" />
+    <Compile Include="Interfaces\ICommandDispatcherFactory.cs" />
     <Compile Include="Repositories\DomainRepositoryBase.cs" />
-    <Compile Include="Exceptions\AggregateNotFoundException.cs" />
     <Compile Include="Interfaces\IAggregate.cs" />
     <Compile Include="Interfaces\IDomainRepository.cs" />
     <Compile Include="Interfaces\IHandle.cs" />
@@ -57,7 +73,12 @@
       <Project>{29d1e281-b04c-44a7-b219-c8ae8d6b6ef2}</Project>
       <Name>CqrsWorkShop.Server.Core.Commands</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CqrsWorkShop.Server.Core\CqrsWorkShop.Server.Core.csproj">
+      <Project>{91CB2A76-EB3D-4DFD-A076-D06CEAC53071}</Project>
+      <Name>CqrsWorkShop.Server.Core</Name>
+    </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
