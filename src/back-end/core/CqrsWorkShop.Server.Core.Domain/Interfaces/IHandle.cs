@@ -1,4 +1,6 @@
-﻿namespace Hse.CqrsWorkShop.Domain
+﻿using Hse.CqrsWorkShop.Domain.Commands;
+
+namespace Hse.CqrsWorkShop.Domain
 {
     public interface IHandle<in TCommand> where TCommand : ICommand
     {

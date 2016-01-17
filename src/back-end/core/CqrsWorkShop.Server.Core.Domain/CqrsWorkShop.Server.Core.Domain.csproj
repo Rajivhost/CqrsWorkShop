@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CqrsWorkShop.Server.Core.Events">
+      <HintPath>..\..\..\..\output\back-end\core\SERVER.CORE.EVENTS\CqrsWorkShop.Server.Core.Events.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -39,12 +42,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IAggregate.cs" />
-    <Compile Include="ICommand.cs" />
-    <Compile Include="IDomainRepository.cs" />
-    <Compile Include="IEvent.cs" />
-    <Compile Include="IHandle.cs" />
+    <Compile Include="Aggregates\AggregateBase.cs" />
+    <Compile Include="Repositories\DomainRepositoryBase.cs" />
+    <Compile Include="Exceptions\AggregateNotFoundException.cs" />
+    <Compile Include="Interfaces\IAggregate.cs" />
+    <Compile Include="Interfaces\IDomainRepository.cs" />
+    <Compile Include="Interfaces\IHandle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CqrsWorkShop.Server.Core.Commands\CqrsWorkShop.Server.Core.Commands.fsproj">
+      <Project>{29d1e281-b04c-44a7-b219-c8ae8d6b6ef2}</Project>
+      <Name>CqrsWorkShop.Server.Core.Commands</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

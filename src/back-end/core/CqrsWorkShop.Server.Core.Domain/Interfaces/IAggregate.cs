@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Hse.CqrsWorkShop.Domain.Events;
 
 namespace Hse.CqrsWorkShop.Domain
 {
