@@ -13,7 +13,6 @@ namespace Hse.CqrsWorkShop.Domain.Aggrates
 
         private enum OrderState
         {
-            ShippingProcessStarted,
             Created,
             Cancelled
         }
@@ -21,18 +20,12 @@ namespace Hse.CqrsWorkShop.Domain.Aggrates
         public OrderAggregate()
         {
             RegisterTransition<OrderCreated>(Apply);
-            RegisterTransition<ShippingProcessStarted>(Apply);
             RegisterTransition<OrderCancelled>(Apply);
         }
 
-        private void Apply(OrderCancelled obj)
+        private void Apply(OrderCancelled orderCancelled)
         {
             _orderState = OrderState.Cancelled;
-        }
-
-        private void Apply(ShippingProcessStarted obj)
-        {
-            _orderState = OrderState.ShippingProcessStarted;
         }
 
         private void Apply(OrderCreated obj)
@@ -81,13 +74,6 @@ namespace Hse.CqrsWorkShop.Domain.Aggrates
             {
                 throw new ShippingStartedException();
             }
-        }
-
-        internal void ShipOrder()
-        {
-            if (_orderState != OrderState.ShippingProcessStarted)
-                throw new InvalidOrderState();
-            RaiseEvent(new OrderShipped(Id));
         }
     }
 }

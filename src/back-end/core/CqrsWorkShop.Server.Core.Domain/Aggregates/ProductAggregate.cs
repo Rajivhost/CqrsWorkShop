@@ -10,8 +10,8 @@ namespace Hse.CqrsWorkShop.Domain.Aggrates
             RegisterTransition<ProductCreated>(Apply);
         }
 
-        internal string Name { get; private set; }
-        internal int Price { get; private set; }
+        public string Name { get; private set; }
+        public int Price { get; private set; }
 
         private void Apply(ProductCreated productCreated)
         {

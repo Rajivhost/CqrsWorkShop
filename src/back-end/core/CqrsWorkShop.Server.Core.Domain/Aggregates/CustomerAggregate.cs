@@ -17,24 +17,24 @@ namespace Hse.CqrsWorkShop.Domain.Aggregates
             RaiseEvent(new CustomerCreated(id, name));
         }
 
-        internal int Discount { get; set; }
+        public int Discount { get; set; }
 
-        private void Apply(CustomerCreated obj)
+        private void Apply(CustomerCreated customerCreated)
         {
-            Id = obj.Id;
+            Id = customerCreated.Id;
         }
 
-        private void Apply(CustomerMarkedAsPreferred obj)
+        private void Apply(CustomerMarkedAsPreferred customerMarkedAsPreferred)
         {
-            Discount = obj.Discount;
+            Discount = customerMarkedAsPreferred.Discount;
         }
 
-        internal static IAggregate Create(Guid id, string name)
+        public static IAggregate Create(Guid id, string name)
         {
             return new CustomerAggregate(id, name);
         }
 
-        internal void MakePreferred(int discount)
+        public void MakePreferred(int discount)
         {
             RaiseEvent(new CustomerMarkedAsPreferred(Id, discount));
         }

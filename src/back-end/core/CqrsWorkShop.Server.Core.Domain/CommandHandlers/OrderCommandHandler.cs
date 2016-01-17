@@ -27,12 +27,5 @@ namespace Hse.CqrsWorkShop.Domain.CommandHandlers
             order.Cancel();
             return order;
         }
-
-        public async Task<IAggregate> HandleAsync(ShipOrder command)
-        {
-            var order = await _domainRepository.GetByIdAsync<OrderAggregate>(command.Id).ConfigureAwait(false);
-            order.ShipOrder();
-            return order;
-        }
     }
 }

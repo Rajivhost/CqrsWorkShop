@@ -29,7 +29,6 @@ namespace Hse.CqrsWorkShop.Domain
             var orderCommandHanler = _serviceFactory.GetInstance<IOrderCommandHandler>();
             commandDispatcher.RegisterHandler<ApproveOrder>(orderCommandHanler);
             commandDispatcher.RegisterHandler<CancelOrder>(orderCommandHanler);
-            commandDispatcher.RegisterHandler<ShipOrder>(orderCommandHanler);
 
             return commandDispatcher;
         }
