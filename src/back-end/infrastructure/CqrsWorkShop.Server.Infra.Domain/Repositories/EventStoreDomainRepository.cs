@@ -62,10 +62,9 @@ namespace Hse.CqrsWorkShop.Domain.Repositories
                     throw new AggregateNotFoundException(message);
                 }
 
+                streamEvents.AddRange(currentSlice.Events);
 
                 nextSliceStart = currentSlice.NextEventNumber;
-
-                streamEvents.AddRange(currentSlice.Events);
 
             } while (!currentSlice.IsEndOfStream);
 

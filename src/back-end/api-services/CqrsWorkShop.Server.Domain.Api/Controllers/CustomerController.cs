@@ -27,5 +27,13 @@ namespace Hse.CqrsWorkShop.Api.Controllers
 
             return Ok();
         }
+
+        [HttpPut, Route("markCustomeraspreferred")]
+        public async Task<IHttpActionResult> MarkCustomerAsPreferredAsync(MarkCustomerAsPreferred markCustomerAsPreferred)
+        {
+            await _commandDispatcher.DispatchAsync(markCustomerAsPreferred).ConfigureAwait(false);
+
+            return Ok();
+        }
     }
 }

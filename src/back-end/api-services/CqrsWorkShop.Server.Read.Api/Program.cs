@@ -25,8 +25,8 @@ namespace Hse.CqrsWorkShop.Api
 
             HostFactory.Run(x =>
             {
-                x.SetServiceName("CqrsWorkShop");
-                x.SetDisplayName("CqrsWorkShop");
+                x.SetServiceName("CqrsWorkShopRead");
+                x.SetDisplayName("CqrsWorkShop Read");
                 x.SetDescription("Windows Service for CqrsWorkShop.");
 
                 x.RunAsNetworkService();

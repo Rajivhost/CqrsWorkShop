@@ -21,7 +21,7 @@ namespace Hse.CqrsWorkShop.Api
         }
     }
 
-    public class Startup : ApiBootstrapper
+    public class Startup : ServiceContainer
     {
         public void Configuration(IAppBuilder app)
         {
@@ -29,27 +29,6 @@ namespace Hse.CqrsWorkShop.Api
 
             ConfigureDiagnostics(app);
         }
-
-        //private static void ConfigureStaticFiles(IAppBuilder app)
-        //{
-        //    app.UseFileServer(new FileServerOptions
-        //    {
-        //        RequestPath = PathString.Empty,
-        //        FileSystem = new PhysicalFileSystem(@".\Web\StaticPages")
-        //    });
-
-        //    app.UseStaticFiles(new StaticFileOptions
-        //    {
-        //        RequestPath = new PathString("/css"),
-        //        FileSystem = new PhysicalFileSystem(@".\Web\Content\css"),
-        //    });
-
-        //    app.UseStaticFiles(new StaticFileOptions
-        //    {
-        //        RequestPath = new PathString("/js"),
-        //        FileSystem = new PhysicalFileSystem(@".\Web\Content\js"),
-        //    });
-        //}
 
         private static void ConfigureRouting(HttpConfiguration httpConfiguration)
         {

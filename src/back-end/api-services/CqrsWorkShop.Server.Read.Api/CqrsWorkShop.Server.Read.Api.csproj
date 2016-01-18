@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{6BE64E5C-92C6-4B6E-A54A-206CA3CD5B09}</ProjectGuid>
+    <ProjectGuid>{85255A79-8B3C-4D18-9DE7-A700EFEDC875}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Hse.CqrsWorkShop.Api</RootNamespace>
-    <AssemblyName>CqrsWorkShop.Server.WindowsService</AssemblyName>
+    <AssemblyName>CqrsWorkShop.Server.ReadWindowsService</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>a3a4f50c</NuGetPackageImportStamp>
@@ -18,7 +18,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\..\..\output\back-end\api-services\SERVER.WINDOWSSERVICE\</OutputPath>
+    <OutputPath>..\..\..\..\output\back-end\api-services\SERVER.READWINDOWSSERVICE\</OutputPath>
     <DefineConstants>TRACE;DEBUG;NET45 SERVER API</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -27,22 +27,22 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\..\..\..\output\back-end\api-services\SERVER.WINDOWSSERVICE\</OutputPath>
+    <OutputPath>..\..\..\..\output\back-end\api-services\SERVER.READWINDOWSSERVICE\</OutputPath>
     <DefineConstants>TRACE;NET45 SERVER API</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CqrsWorkShop.Server.Core.Commands, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\output\back-end\core\SERVER.CORE.COMMANDS\CqrsWorkShop.Server.Core.Commands.dll</HintPath>
-    </Reference>
     <Reference Include="LightInject, Version=4.0.4.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\..\lib\LightInject.4.0.4\lib\net45\LightInject.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="LightInject.WebApi, Version=1.0.0.4, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\..\lib\LightInject.WebApi.1.0.0.4\lib\net45\LightInject.WebApi.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="LiteDB, Version=1.0.4.0, Culture=neutral, PublicKeyToken=5c2fff750805920e, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\lib\LiteDB.1.0.4\lib\net40\LiteDB.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Owin, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -133,33 +133,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\CustomerController.cs" />
-    <Compile Include="Models\CreateCustomerDto.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Database.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="FodyWeavers.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\core\CqrsWorkShop.Server.Core.Domain\CqrsWorkShop.Server.Core.Domain.csproj">
-      <Project>{AF835AA0-C2E2-4B48-B25C-4620406DE7D0}</Project>
-      <Name>CqrsWorkShop.Server.Core.Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\core\CqrsWorkShop.Server.Core\CqrsWorkShop.Server.Core.csproj">
-      <Project>{91CB2A76-EB3D-4DFD-A076-D06CEAC53071}</Project>
-      <Name>CqrsWorkShop.Server.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\infrastructure\CqrsWorkShop.Server.Infra.DepResolution\CqrsWorkShop.Server.Infra.DepResolution.csproj">
-      <Project>{C1840BEC-3323-43E0-87F6-08E194B95D2C}</Project>
-      <Name>CqrsWorkShop.Server.Infra.DepResolution</Name>
-    </ProjectReference>
+    <Folder Include="Models\" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\..\..\..\lib\Fody.1.29.4\build\portable-net+sl+win+wpa+wp\Fody.targets" Condition="Exists('..\..\..\..\lib\Fody.1.29.4\build\portable-net+sl+win+wpa+wp\Fody.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
