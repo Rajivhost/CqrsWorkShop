@@ -13,6 +13,7 @@ namespace Hse.CqrsWorkShop.Domain.Repositories
 {
     public class EventStoreDomainRepository : DomainRepositoryBase
     {
+        private const int PageSize = 512;
         private IEventStoreConnection _connection;
         private readonly IGuidIdProvider _guidIdProvider;
         private const string Category = "HseShop";
@@ -42,23 +43,40 @@ namespace Hse.CqrsWorkShop.Domain.Repositories
             return events;
         }
 
-        public override async Task<TResult> GetByIdAsync<TResult>(Guid id)
+        public override async Task<TAggregate> GetByIdAsync<TAggregate>(Guid id)
         {
-            var streamName = AggregateToStreamName(typeof(TResult), id);
-            var eventsSlice = await _connection.ReadStreamEventsForwardAsync(streamName, 0, int.MaxValue, false).ConfigureAwait(false);
-            if (eventsSlice.Status == SliceReadStatus.StreamNotFound)
-            {
-                var message = string.Format("Could not found aggregate of type '{0}' and id '{1}'", typeof(TResult), id);
+            var streamName = AggregateToStreamName(typeof(TAggregate), id);
 
-                throw new AggregateNotFoundException(message);
-            }
-            var deserializedEvents = eventsSlice.Events.Select(e =>
+            StreamEventsSlice currentSlice;
+            var nextSliceStart = StreamPosition.Start;
+
+            var streamEvents = new List<ResolvedEvent>();
+
+            do
+            {
+                currentSlice = await _connection.ReadStreamEventsForwardAsync(streamName, nextSliceStart, PageSize, false).ConfigureAwait(false);
+                if (currentSlice.Status == SliceReadStatus.StreamDeleted || currentSlice.Status == SliceReadStatus.StreamNotFound)
+                {
+                    var message = string.Format("Could not found aggregate of type '{0}' and id '{1}'", typeof(TAggregate), id);
+
+                    throw new AggregateNotFoundException(message);
+                }
+
+
+                nextSliceStart = currentSlice.NextEventNumber;
+
+                streamEvents.AddRange(currentSlice.Events);
+
+            } while (!currentSlice.IsEndOfStream);
+
+            var deserializedEvents = streamEvents.Select(e =>
             {
                 var metadata = DeserializeObject<Dictionary<string, string>>(e.OriginalEvent.Metadata);
                 var eventData = DeserializeObject(e.OriginalEvent.Data, metadata[EventClrTypeHeader]);
                 return eventData as IEvent;
             });
-            return BuildAggregate<TResult>(deserializedEvents);
+
+            return BuildAggregate<TAggregate>(deserializedEvents);
         }
 
         public EventData CreateEventData(object @event)

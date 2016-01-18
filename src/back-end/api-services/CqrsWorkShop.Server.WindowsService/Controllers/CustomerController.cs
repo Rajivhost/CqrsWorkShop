@@ -25,7 +25,7 @@ namespace Hse.CqrsWorkShop.Api.Controllers
 
             await _commandDispatcher.DispatchAsync(createCustomer).ConfigureAwait(false);
 
-            return Created("createcustomer", createCustomer);
+            return Ok();
         }
     }
 }

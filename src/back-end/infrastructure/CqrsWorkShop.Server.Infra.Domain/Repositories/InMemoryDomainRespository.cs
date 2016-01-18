@@ -61,7 +61,10 @@ namespace Hse.CqrsWorkShop.Domain.Repositories
                     var deserializedEvents = events.Select(e => JsonConvert.DeserializeObject(e, _serializationSettings) as IEvent);
                     return BuildAggregate<TAggregate>(deserializedEvents);
                 }
-                throw new AggregateNotFoundException("Could not found aggregate of type " + typeof(TAggregate) + " and id " + id);
+
+                var message = string.Format("Could not found aggregate of type '{0}' and id '{1}'", typeof(TAggregate), id);
+
+                throw new AggregateNotFoundException(message);
             });
         }
 

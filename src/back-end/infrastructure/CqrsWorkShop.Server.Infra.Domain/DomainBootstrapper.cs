@@ -26,6 +26,7 @@ namespace Hse.CqrsWorkShop.Domain
         protected virtual void RegisterRepositories(IServiceRegistry serviceRegistry)
         {
             serviceRegistry.Register<IDomainRepository, EventStoreDomainRepository>();
+            //serviceRegistry.Register<IDomainRepository, InMemoryDomainRespository>();
         }
 
         protected virtual void RegisterDomainServices(IServiceRegistry serviceRegistry)
