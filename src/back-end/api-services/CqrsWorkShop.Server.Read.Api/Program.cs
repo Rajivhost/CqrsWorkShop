@@ -32,7 +32,7 @@ namespace Hse.CqrsWorkShop.Api
                 x.RunAsNetworkService();
                 x.StartAutomatically();
                 x.UseSerilog();
-                x.Service<ShopService>(service =>
+                x.Service<EventHandlerService>(service =>
                 {
 
                     service.OwinEndpoint(app =>
@@ -40,7 +40,7 @@ namespace Hse.CqrsWorkShop.Api
                         app.Domain = "localhost";
                         app.Port = Convert.ToInt32(ConfigurationManager.AppSettings.Get("ListeningPort"));
 
-                        service.ConstructUsing(builder => new ShopService());
+                        service.ConstructUsing(builder => new EventHandlerService());
                         service.WhenStarted((startUp, hostControl) => startUp.Start(hostControl));
                         service.WhenStopped((startUp, hostControl) => startUp.Stop(hostControl));
 
