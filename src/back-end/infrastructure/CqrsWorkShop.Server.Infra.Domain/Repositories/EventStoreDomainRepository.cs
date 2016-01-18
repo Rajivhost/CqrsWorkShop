@@ -97,7 +97,7 @@ namespace Hse.CqrsWorkShop.Domain.Repositories
 
         private static string AggregateToStreamName(Type type, Guid id)
         {
-            return string.Format("{0}-{1}-{2}", Category, type.Name, id);
+            return string.Format("{0}-{1}-{2}", Category, type.Name.Replace("Aggregate", string.Empty), id);
         }
 
         private static T DeserializeObject<T>(byte[] data)
