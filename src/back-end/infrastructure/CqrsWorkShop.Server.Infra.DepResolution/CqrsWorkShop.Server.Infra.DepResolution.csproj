@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C1840BEC-3323-43E0-87F6-08E194B95D2C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Hse.CqrsWorkShop</RootNamespace>
+    <AssemblyName>CqrsWorkShop.Server.Infra.DepResolution</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\..\..\output\back-end\infrastructure\SERVER.INFRA.DEPRESOLUTION\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;NET45 SERVER INFRA</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\..\..\output\back-end\infrastructure\SERVER.INFRA.DEPRESOLUTION\</OutputPath>
+    <DefineConstants>TRACE;NET45 SERVER INFRA</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="LightInject, Version=4.0.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\lib\LightInject.4.0.4\lib\net45\LightInject.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApiBootstrapper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\core\CqrsWorkShop.Server.Core.Commands\CqrsWorkShop.Server.Core.Commands.fsproj">
+      <Project>{29d1e281-b04c-44a7-b219-c8ae8d6b6ef2}</Project>
+      <Name>CqrsWorkShop.Server.Core.Commands</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\core\CqrsWorkShop.Server.Core.Domain\CqrsWorkShop.Server.Core.Domain.csproj">
+      <Project>{AF835AA0-C2E2-4B48-B25C-4620406DE7D0}</Project>
+      <Name>CqrsWorkShop.Server.Core.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\core\CqrsWorkShop.Server.Core.Entities\CqrsWorkShop.Server.Core.Entities.fsproj">
+      <Project>{a93d4ec3-20de-4540-95d1-07aed5d5d181}</Project>
+      <Name>CqrsWorkShop.Server.Core.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\core\CqrsWorkShop.Server.Core.Events\CqrsWorkShop.Server.Core.Events.fsproj">
+      <Project>{6598cdba-697e-41cf-8fc5-81aec527e8c4}</Project>
+      <Name>CqrsWorkShop.Server.Core.Events</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\core\CqrsWorkShop.Server.Core\CqrsWorkShop.Server.Core.csproj">
+      <Project>{91CB2A76-EB3D-4DFD-A076-D06CEAC53071}</Project>
+      <Name>CqrsWorkShop.Server.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CqrsWorkShop.Server.Infra.Domain\CqrsWorkShop.Server.Infra.Domain.csproj">
+      <Project>{64346818-2D6F-4B58-B112-846F09584F77}</Project>
+      <Name>CqrsWorkShop.Server.Infra.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CqrsWorkShop.Server.Infra\CqrsWorkShop.Server.Infra.csproj">
+      <Project>{22A7858D-1D45-4A2F-BA1C-7DC11BFF5670}</Project>
+      <Name>CqrsWorkShop.Server.Infra</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
