@@ -21,7 +21,7 @@ namespace Hse.CqrsWorkShop.Domain
             _routes.Add(typeof (TCommand), async command => await handler.HandleAsync(command as TCommand).ConfigureAwait(false));
         }
 
-        public async void ExecuteCommand<TCommand>(TCommand command) where TCommand : ICommand
+        public async Task DispatchAsync<TCommand>(TCommand command) where TCommand : ICommand
         {
             var commandType = command.GetType();
 
